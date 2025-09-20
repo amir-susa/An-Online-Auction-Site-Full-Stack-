@@ -11,6 +11,7 @@ import AuthPage from './components/AuthPage';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './assets/Logo.png';
 
 // Import React-Bootstrap components
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
@@ -41,7 +42,7 @@ function MainApp() {
                     <Navbar.Brand as={Link} to="/">
                         {/* Use the logo image you saved, e.g., 'swiftbid-logo.png' */}
                         <img
-                            src="/Logo.png" // Make sure this path matches where you save your logo!
+                            src={logo} // Make sure this path matches where you save your logo!
                             width="45"
                             height="45"
                             className="d-inline-block align-top"
