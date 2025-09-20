@@ -11,7 +11,7 @@ import AuthPage from './components/AuthPage';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './assets/Logo.png';
+import logo from './assets/Logo';
 
 // Import React-Bootstrap components
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
