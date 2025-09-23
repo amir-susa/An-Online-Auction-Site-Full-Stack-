@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Create an Axios instance with a base URL
-const API = axios.create({baseURL: 'https://an-online-auction-site-full-stack-1.onrender.com',});
+const API = axios.create({baseURL: 'https://an-online-auction-site-full-stack.onrender.com',});
 
 
 // Optionally attach token automatically for all requests
