@@ -1,17 +1,20 @@
+// frontend/src/components/AddItemForm.jsx
+
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios'; // <-- REMOVED RAW AXIOS
+import API from '../api'; // <-- IMPORT CONFIGURED API INSTANCE
 import { useNavigate } from 'react-router-dom';
 
 const AddItemForm = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [startingPrice, setStartingPrice] = useState(''); // Use startingPrice to match model
+    const [startingPrice, setStartingPrice] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [imageFile, setImageFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
-    const [endTime, setEndTime] = useState(''); // Add state for end time
+    const [endTime, setEndTime] = useState('');
     
     const navigate = useNavigate();
 
@@ -29,7 +32,7 @@ const AddItemForm = () => {
         formData.append('name', name);
         formData.append('description', description);
         formData.append('startingPrice', startingPrice);
-        formData.append('endTime', endTime); // Append end time
+        formData.append('endTime', endTime);
 
         // Append one or the other, not both
         if (imageFile) {
@@ -46,12 +49,15 @@ const AddItemForm = () => {
                 return;
             }
 
-            await axios.post('http://localhost:3000/api/items', formData, {
+            // --- CHANGE IS HERE: Use API.post instead of axios.post with hardcoded URL ---
+            await API.post('/api/items', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}` // Include Authorization header
+                    // Note: Axios and API instance will automatically set the correct Content-Type for FormData, 
+                    // but we keep the Authorization header.
+                    'Authorization': `Bearer ${token}` 
                 },
             });
+            // --- END CHANGE ---
 
             setSuccessMessage('Item added successfully!');
             setTimeout(() => {
@@ -133,7 +139,7 @@ const AddItemForm = () => {
                         className="form-control"
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
-                        disabled={!!imageFile} // Disable URL input if a file is selected
+                        disabled={!!imageFile}
                     />
                 </div>
                 <button type="submit" className="btn btn-primary" disabled={loading}>

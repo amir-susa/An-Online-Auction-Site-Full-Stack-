@@ -1,7 +1,6 @@
-// frontend/src/components/AuthPage.jsx
-
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios'; // <-- Removed raw axios import
+import API from '../api'; // <-- IMPORT YOUR CONFIGURED AXIOS INSTANCE
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
@@ -22,7 +21,8 @@ const AuthPage = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', {
+      // Using the configured API instance. Base URL is now dynamic!
+      const response = await API.post('/api/users/login', {
         email: loginEmail,
         password: loginPassword,
       });
@@ -37,7 +37,8 @@ const AuthPage = () => {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/users/register', {
+      // Using the configured API instance. Base URL is now dynamic!
+      await API.post('/api/users/register', {
         username: registerUsername,
         email: registerEmail,
         password: registerPassword,
